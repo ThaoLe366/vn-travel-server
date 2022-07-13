@@ -1,0 +1,44 @@
+
+# @name login
+POST https://vntravel-api.herokuapp.com/app/api/v1/auths/login/users?userRole=true
+Content-Type: application/json
+
+{
+    "email": "nhungle@gmail.com",
+    "password" : "12345"
+}
+
+###
+@authToken = {{login.response.body.token}}
+###
+### Create new review
+
+POST http://localhost:5000/app/api/v1/reviews
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "title": "GOOD",
+    "content": "Today, it is so beautiful rather than before",
+    "rate": 4,
+    "place": "61bcb2254eeca820dcf7fa11",
+    "visitedTime": "2021-09-23T10:50:00"
+}
+
+### Get reviews by place Id
+GET http://localhost:5000/app/api/v1/reviews/613b1da30ea0491390fa5bb0
+Content-Type: application/json
+
+### Put update like status
+PUT http://localhost:5000/app/api/v1/reviews/liked/6155764141338b4a486073f2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJpZCI6IjYxNTU2YmQ0NjUyZDUyMjFmNDI3ZjkyZSIsImVtYWlsIjoidGhhb2xlMzAxMDAwQGdtYWlsLmNvbSIsImlzVXNlciI6ZmFsc2UsImltYWdlIjoiaHR0cHM6Ly9oaW5obmVuMTIzLmNvbS93cC1jb250ZW50L3VwbG9hZHMvMjAyMS8wNi9hdnQtY3V0ZS05LmpwZyIsIm5hbWUiOiJOZ3V5ZW4gVE0gSG9hbmcifSwiaWF0IjoxNjM3OTg5MjcyLCJleHAiOjE2MzgwMTgwNzJ9.LbDz_zCs_qj5STLcgImJXo5iEQ9xTb48E0Zmx8s16GE
+
+### Put update isHidden status (Delete)
+PUT http://localhost:5000/app/api/v1/reviews/delete/6155764141338b4a486073f2
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+{
+    "isHidden": true
+}

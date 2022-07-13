@@ -1,0 +1,138 @@
+###Register
+POST http://localhost:5000/app/api/v1/auths/register
+Content-Type: application/json
+
+{
+     "email": "thaole301000@gmail.com",
+    "password" : "12345",
+    "fullName": "Le Thi Ngoc Nhung"
+}
+
+### Login by email password
+# @name login
+POST http://localhost:5000/app/api/v1/auths/login/users?userRole=true       
+Content-Type: application/json
+
+{
+   "email": "nhungle@gmail.com",
+   "password" : "12345"
+}
+
+###
+@authToken = {{login.response.body.token}}
+### Add favorite places
+PUT http://localhost:5000/app/api/v1/users/favorite/611930190aab361378748f0b
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+###Get user 
+GET http://localhost:5000/app/api/v1/users
+Content-Type: application/json
+Authorization: token {{authToken}}
+###
+PUT http://localhost:5000/app/api/v1/users/6131fdf6198dac30ecbfa6cd/status  
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+{
+    "id":"6131fdf6198dac30ecbfa6cd",
+    "isHidden": true
+}
+
+###
+GET http://localhost:5000/app/api/v1/auths/verify
+Content-Type: application/json
+Authorization:  token {{authToken}}
+
+### Update recent search
+PUT http://localhost:5000/app/api/v1/users/recentSearch/613b1da30ea0491390fa5bb0
+Content-Type: application/json
+Authorization: token {{authToken}}
+### Get recent search
+GET http://localhost:5000/app/api/v1/users/recentSearch
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+### Add favorites
+PUT http://localhost:5000/app/api/v1/users/favorite/613f4f867963b61e40efe78a
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+### Delete favorites
+DELETE http://localhost:5000/app/api/v1/users/favorite/613f4f867963b61e40efe78a
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+###Update Profile
+POST   http://localhost:5000/app/api/v1/users/profiles
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+{
+    "image":"https://unsplash.com/photos/O3ymvT7Wf9U",
+    "fullName":"Nhung Le"
+}
+### Get favorites 
+GET http://localhost:5000/app/api/v1/users/favorite
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+### Check is Can login
+
+GET http://localhost:5000/app/api/v1/users/loginPassword/thaole301000@gmail.com
+Content-Type: application/json
+
+
+### Change password
+PUT http://localhost:5000/app/api/v1/users/password
+Content-Type: application/json
+Authorization: Bearer 
+
+{
+    "email":"thaole301000@gmail.com",
+    "password":"1234567",
+    "newPassword":"12345"
+}
+
+### Login gooogle 
+POST http://localhost:5000/app/api/v1/auths/login/google?userRole=true
+Content-Type: application/json
+Authorization: Bearer 
+
+### Check email exist
+GET http://localhost:5000/app/api/v1/auths/exists/18110366@student.hcmute.edu.vn
+Content-Type: application/json
+
+### Send code verify
+GET http://localhost:5000/app/api/v1/auths/send-email/thaole301000@gmail.com/123456
+Content-Type: application/json
+
+### Verify code user input
+GET http://localhost:5000/app/api/v1/auths/passwords/verify/123456/184807 
+Content-Type: application/json
+
+### Change password
+PUT http://localhost:5000/app/api/v1/auths/passwords 
+Content-Type: application/json
+
+{
+    "code":"123456",
+    "verifyCode":"184807",
+    "password":"123456",
+   "email": "18110366@student.hcmute.edu.vn"
+}
+
+
+###
+POST http://localhost:5000/app/api/v1/users/translate
+Content-Type: application/json
+
+{
+    "q":"Bánh canh ghẹ Ngọc Lâm",
+    "lang": "en"
+}
+
+### Get friends 
+GET http://localhost:5000/app/api/v1/users/friends/618dccf03e651a0e00fb15ca
+Content-Type: application/json
+Authorization: Bearer {{authToken}}

@@ -1,0 +1,46 @@
+# @name login
+POST https://vntravel-api.herokuapp.com/app/api/v1/auths/login/users?userRole=false
+Content-Type: application/json
+
+{
+    "email": "thaole301000@gmail.com",
+    "password" : "12345"
+}
+
+###
+@authToken = {{login.response.body.token}}
+###
+
+
+### Category
+###
+GET http://localhost:5000/app/api/v1/categories/public
+Content-Type: application/json
+
+
+### 
+POST http://localhost:5000/app/api/v1/categories
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+{
+    "name": "Trà sữa",
+    "color":"#f5f5f5"
+}
+
+### 
+PUT https://vntravel-api.herokuapp.com/app/api/v1/categories/612f4c5dedf61b472ce3758d
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+{
+    "name":"Entertainment",
+    "color":"#A4B114"
+}
+
+### 
+DELETE  http://localhost:5000/app/api/v1/categories/611e6def78854c213c98b303
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+

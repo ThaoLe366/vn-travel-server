@@ -1,0 +1,52 @@
+# @name login
+POST http://localhost:5000/app/api/v1/auths/login/users?userRole=false
+Content-Type: application/json
+
+{
+    "email": "thaole301000@gmail.com",
+    "password" : "12345"
+}
+
+###
+@authToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJpZCI6IjYxY2JkMDkzYjRmNGE4MjcxMDIwMWY3YSIsImVtYWlsIjoidGhhb2xlMzAxMDAwQGdtYWlsLmNvbSIsImlzVXNlciI6ZmFsc2UsImltYWdlIjoiaHR0cHM6Ly9oaW5obmVuMTIzLmNvbS93cC1jb250ZW50L3VwbG9hZHMvMjAyMS8wNi9hdnQtY3V0ZS05LmpwZyJ9LCJpYXQiOjE2NDA3NDcxODksImV4cCI6MTY0MDgzMzU4OX0.lyoBLNYpuumRQ_0WvDzkOEKRgbUNPZKdof7P_EY72cw"
+###
+
+### Province
+###
+GET https://vntravel-api.herokuapp.com/app/api/v1/provinces
+Content-Type: application/json
+
+
+### 
+POST http://localhost:5000/app/api/v1/provinces/
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJpZCI6IjYxY2JkMDkzYjRmNGE4MjcxMDIwMWY3YSIsImVtYWlsIjoidGhhb2xlMzAxMDAwQGdtYWlsLmNvbSIsImlzVXNlciI6ZmFsc2UsImltYWdlIjoiaHR0cHM6Ly9oaW5obmVuMTIzLmNvbS93cC1jb250ZW50L3VwbG9hZHMvMjAyMS8wNi9hdnQtY3V0ZS05LmpwZyJ9LCJpYXQiOjE2NDA3NDcxODksImV4cCI6MTY0MDgzMzU4OX0.lyoBLNYpuumRQ_0WvDzkOEKRgbUNPZKdof7P_EY72cw
+
+{
+    "name": "Thừa Thiên Huế",
+    "color":"#AA5521",
+    "isHidden":false,
+    "image":"https://file1.dangcongsan.vn/data/0/images/2021/11/05/halthts/thua-thien-hue.jpg"
+}
+
+### 
+PUT https://vntravel-api.herokuapp.com/app/api/v1/provinces/614bdd73885f3700161f71c1
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+{
+    "name": "Hello 1",
+    "isHidden": false,
+    "color":"#0000"
+}
+
+### 
+DELETE  http://localhost:5000/app/api/v1/provinces/611e2ace95dcd508f4706781
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+### 
+DELETE  http://localhost:5000/app/api/v1/provinces/delete/all
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJpZCI6IjYxNTU2YmQ0NjUyZDUyMjFmNDI3ZjkyZSIsImVtYWlsIjoidGhhb2xlMzAxMDAwQGdtYWlsLmNvbSIsImlzVXNlciI6ZmFsc2UsInBpY3R1cmUiOiJodHRwczovL2hpbmhuZW4xMjMuY29tL3dwLWNvbnRlbnQvdXBsb2Fkcy8yMDIxLzA2L2F2dC1jdXRlLTkuanBnIiwibmFtZSI6Ik5ndXllbiBUTSBIb2FuZyJ9LCJpYXQiOjE2MzY5MDExNjQsImV4cCI6MTYzNjkyOTk2NH0.5h6jEn5GE4fOGEyJsBcaDLXAEHBWH06SF_MzvimXoQ0
+

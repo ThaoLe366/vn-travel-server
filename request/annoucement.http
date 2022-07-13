@@ -1,0 +1,86 @@
+
+# @name login
+POST http://localhost:5000/app/api/v1/auths/login/users?userRole=true       
+Content-Type: application/json
+
+{
+   "email": "nhungle@gmail.com",
+   "password" : "12345"
+}
+
+###
+@authToken = {{login.response.body.token}}
+
+###
+POST http://localhost:5000/app/api/v1/annoucements/trip_added
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "creator":{
+        "id": "61b69a624a14bd2d28d8cce0",
+        "fullName": "Hoàng Nguyễn",
+        "image":"https://lh3.googleusercontent.com/a-/AOh14Gg4x3IOIxmTCDBYhNY4nKVGI7PRw3pLM2Nua8erjg=s96-c"
+    },
+    "type": "trip_added",
+    "receiver":{
+        "id":"618dccf03e651a0e00fb15ca",
+        "fullName":"Thao Lê Thị Phương",
+        "image":"https://res.cloudinary.com/vntravel285366/image/upload/v1645767041/dvyulawuzydrclpoolah.jpg"
+    },
+    "plan":{
+        "id":"61bd6787c6378f2fc01d48b9",
+        "name":"Honey trip"
+    }
+}
+
+###
+POST http://localhost:5000/app/api/v1/annoucements/accept_friend
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "creator":{
+        "id": "61b69a624a14bd2d28d8cce0",
+        "fullName": "Hoàng Nguyễn"
+    },
+    "receiver":{
+        "id":"618dccf03e651a0e00fb15ca",
+        "fullName":"Thao Lê Thị Phương"
+    }
+    
+}
+
+###
+POST http://localhost:5000/app/api/v1/annoucements/friend_add
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "creator":{
+        "id": "618dccf03e651a0e00fb15ca",
+        "fullName": "Thao Lê Th ị Phương",
+         "image":"https://res.cloudinary.com/vntravel285366/image/upload/v1645767041/dvyulawuzydrclpoolah.jpg"
+    },
+    "type": "friend_add",
+    "receiver":{
+        "id":"61b69a624a14bd2d28d8cce0",
+        "fullName":"Hoàng Nguyễn",
+         "image":"https://lh3.googleusercontent.com/a-/AOh14Gg4x3IOIxmTCDBYhNY4nKVGI7PRw3pLM2Nua8erjg=s96-c"
+    }
+    
+}
+
+####
+GET http://localhost:5000/app/api/v1/annoucements/read
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+PUT http://localhost:5000/app/api/v1/annoucements/62763a8357af3c31749689bc
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "unread": false
+}

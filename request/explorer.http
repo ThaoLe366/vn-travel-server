@@ -1,0 +1,47 @@
+
+# @name login
+POST http://localhost:5000/app/api/v1/auths/login/users?userRole=false
+Content-Type: application/json
+
+{
+    "email": "thaole301000@gmail.com",
+    "password" : "12345"
+}
+
+###
+@authToken = {{login.response.body.token}}
+###
+
+### Create new explorer
+
+POST http://localhost:5000/app/api/v1/explorers
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+{
+    "title": "Tet",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
+    "banner": "https://intphcm.com/data/upload/banner-tet.jpg" ,
+    "tags":["614c017e27c6e100160c06f9"]
+}
+
+### Get all explorers
+
+GET https://vntravel-api.herokuapp.com/app/api/v1/explorers/private
+Content-Type: application/json
+Authorization: token eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJpZCI6IjYxNTU2YmQ0NjUyZDUyMjFmNDI3ZjkyZSIsImVtYWlsIjoidGhhb2xlMzAxMDAwQGdtYWlsLmNvbSIsImlzVXNlciI6ZmFsc2UsImltYWdlIjoiaHR0cHM6Ly9oaW5obmVuMTIzLmNvbS93cC1jb250ZW50L3VwbG9hZHMvMjAyMS8wNi9hdnQtY3V0ZS05LmpwZyIsIm5hbWUiOiJOZ3V5ZW4gVE0gSG9hbmcifSwiaWF0IjoxNjM3NjU3ODU5LCJleHAiOjE2Mzc2ODY2NTl9.K7z5oQ0M4F7tOU9x0FheQa9qMqIpVxcpdViRmCnWf48
+
+### Update explorer
+
+PUT http://localhost:5000/app/api/v1/explorers/6190d2f86b93131964e73d34
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+{
+    "title": "Thành phố nhộn nhịp",
+    "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy.",
+    "banner": "https://huesmiletravel.com.vn/wp-content/uploads/2019/11/Kham-pha-thien-duong-du-lich-nha-trang.jpg",
+    "tags":["614c017e27c6e100160c06f9"],
+    "isHidden": false 
+   
+}

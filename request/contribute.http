@@ -1,0 +1,47 @@
+# @name login
+POST https://vntravel-api.herokuapp.com/app/api/v1/auths/login/users?userRole=true
+Content-Type: application/json
+
+{
+    "email": "nhungle@gmail.com",
+    "password" : "12345"
+}
+
+###
+@authToken = {{login.response.body.token}}
+###
+
+### Create new contribute
+
+POST https://vntravel-api.herokuapp.com/app/api/v1/contributes
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "content": "Nội dung không đúng sự thật",
+    "place": "61bcb2254eeca820dcf7fa11"
+}
+
+### Get all contribute
+
+GET http://localhost:5000/app/api/v1/contributes
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+
+### Get  contribute by contribute Id
+GET http://localhost:5000/app/api/v1/contributes/611cabbfbe7b90302c609627
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJmYXZvcml0ZSI6WyI2MTFiNzdjN2EzYTM4NTQwOThmM2Y3ZjIiLCI2MTE5MzAxOTBhYWIzNjEzNzg3NDhmMGIiXSwiaXNVc2VyIjpmYWxzZSwiZW1haWwiOiJob2FuZ25ndXllbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlbDJJSFRkcElGd0QxZHlHLmZGT291bC9ZeWVKYXdXQXRTUFhlUVAvRUJ5Vm81dXJWM3plZSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTdUMDY6MjE6MTAuNzkyWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDgtMTdUMDY6MjE6MTAuNzkyWiIsImlkIjoiNjExYjU1NTZmZjEwMTMyMjYwZDllMjc5In0sImlhdCI6MTYyOTI2ODE0NCwiZXhwIjoxNjI5MjcxNzQ0fQ.74EFu5h73a1vPgB_wq_jh9ql1rw5L4v3-Ko7SFVOyjI
+
+
+### Get  contribute by place Id
+GET http://localhost:5000/app/api/v1/contributes/place/611930190aab361378748f0b
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJmYXZvcml0ZSI6WyI2MTFiNzdjN2EzYTM4NTQwOThmM2Y3ZjIiLCI2MTE5MzAxOTBhYWIzNjEzNzg3NDhmMGIiXSwiaXNVc2VyIjpmYWxzZSwiZW1haWwiOiJob2FuZ25ndXllbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlbDJJSFRkcElGd0QxZHlHLmZGT291bC9ZeWVKYXdXQXRTUFhlUVAvRUJ5Vm81dXJWM3plZSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTdUMDY6MjE6MTAuNzkyWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDgtMTdUMDY6MjE6MTAuNzkyWiIsImlkIjoiNjExYjU1NTZmZjEwMTMyMjYwZDllMjc5In0sImlhdCI6MTYyOTI2ODE0NCwiZXhwIjoxNjI5MjcxNzQ0fQ.74EFu5h73a1vPgB_wq_jh9ql1rw5L4v3-Ko7SFVOyjI
+
+
+### Update isSeen
+PUT http://localhost:5000/app/api/v1/contributes/seen/6120ac8fe266c2375cd09728
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJmYXZvcml0ZSI6W10sImlzVXNlciI6dHJ1ZSwiZW1haWwiOiJob2FuZ25ndXllbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCR6QXhFYTZDOUxwOTBvd1JNM3owYkNPSTdHazh5OHBRbDZlOTB4RFRmM2hJemhOa2JrSGM2eSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMjBUMjE6MDY6NTcuMDAwWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDgtMjBUMjE6MDY6NTcuMDAwWiIsImlkIjoiNjExZmI3MDFhMmMyNGYzNGVjZGRjOGNhIn0sImlhdCI6MTYyOTUzMDM0OCwiZXhwIjoxNjI5NTU5MTQ4fQ.SBeAqW__keGbfplzATdAus6tkpgm5mggjEY6v3Q2228

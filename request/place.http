@@ -1,0 +1,148 @@
+
+# @name login
+POST http://localhost:5000/app/api/v1/auths/login/users?userRole=true
+Content-Type: application/json
+
+{
+    "email": "thaole@gmail.com",
+    "password" : "12345"
+}
+
+###
+@authToken = {{login.response.body.token}}
+###
+
+
+### Create new place
+POST  http://localhost:5000/app/api/v1/places
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "popular": true,
+    "name": "Phổ cố Hội An 3",
+    "description": "Phố cổ Hội An là một thành phố nổi tiếng của tỉnh Quảng Nam, một phố cổ giữ được gần như nguyên vẹn với hơn 1000 di tích kiến trúc từ phố xá, nhà cửa, hội quán, đình, chùa, miếu, nhà thờ tộc, giếng cổ… đến các món ăn truyền thống, tâm hồn của người dân nơi đây. Một lần du lịch Hội An sẽ làm say đắm lòng du khách bởi những nét đẹp trường tồn cùng thời gian, vô cùng mộc mạc, bình dị.",
+    "address":"TL 7",
+    "longtitude": 16,
+    "lattitude": 109,
+    "tags":[],
+    "rate": 5,
+    "weight": 10,
+    "province" :"61cbd14cb4f4a82710201f7f",
+    "category":"61cbd194b4f4a82710201f82",
+    "startPrice":"20000",
+    "endPrice":"80000",
+    "closeTime": "18:5",
+    "openTime": "7:5",
+    "status":"public"
+}
+
+### Add image to place
+POST http://localhost:5000/app/api/v1/places/613add51a784f131b084e56e/images
+Content-Type: application/json
+
+{
+    images:"https://cdnmedia.thethaovanhoa.vn/Upload/tyTrfgkgEUQwPYuvZ4Kn1g/files/2019/07/1607/hoi-an.jpghttps://cdnmedia.thethaovanhoa.vn/Upload/tyTrfgkgEUQwPYuvZ4Kn1g/files/2019/07/1607/hoi-an.jpg"
+}
+### Get place
+
+GET http://localhost:5000/app/api/v1/places/613b1da30ea0491390fa5bb0?populate=true
+Content-Type: application/json
+
+
+### Get places
+
+GET https://vntravel-api.herokuapp.com/app/api/v1/places/private?populate=true
+Content-Type: application/json
+
+### Update images inplace
+PUT http://localhost:5000/app/api/v1/places/613b1da30ea0491390fa5bb0/images
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+{
+    "id":"613b1da30ea0491390fa5bb0",
+    "images":["https://cdn1.nhatrangtoday.vn/images/photos/kinh-nghiem-dat-ve-xe-nha-trang-da-lat-1.jpg","https://www.vietnambooking.com/wp-content/uploads/2020/12/kinh-nghiem-di-da-lat-thang-12-1.jpg"
+    ]
+}
+###FIND PLACES CONTAIN TAG ID
+PUT http://localhost:5000/app/api/v1/places/explores/tags
+Content-Type: application/json
+
+{
+    "tags":["613ea5e3a6243319d4e0cad3", "614c018a27c6e100160c06fc"]
+}
+
+#### GET PLACE OF ONE CATEGORY
+GET http://localhost:5000/app/api/v1/places/category/612f41c7e410f520706e6428
+Content-Type: application/json
+
+#### GET PLACE OF ONE province
+GET http://localhost:5000/app/api/v1/places/province/612f41c7e410f520706e6428
+Content-Type: application/json
+###
+POST http://localhost:5000/app/api/v1/places/suggestion
+Content-Type: application/json
+
+{
+    "text": "sư p"
+}
+
+####
+
+GET http://localhost:5000/app/api/v1/places/popular/topRating
+
+
+
+### Create new place
+PUT  http://localhost:5000/app/api/v1/places/61cbd802b4f4a82710201fa5
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "popular": true,
+    "name": "Phổ cố Hội An 4",
+    "description": "Phố cổ Hội An là một thành phố nổi tiếng của tỉnh Quảng Nam, một phố cổ giữ được gần như nguyên vẹn với hơn 1000 di tích kiến trúc từ phố xá, nhà cửa, hội quán, đình, chùa, miếu, nhà thờ tộc, giếng cổ… đến các món ăn truyền thống, tâm hồn của người dân nơi đây. Một lần du lịch Hội An sẽ làm say đắm lòng du khách bởi những nét đẹp trường tồn cùng thời gian, vô cùng mộc mạc, bình dị.",
+    "address":"TL 7",
+    "lattitude": 16.01234,
+    "longtitude":109.12345,
+    "tags":[],
+    "rate": 5,
+    "weight": 10,
+    "province" :"61cbd14cb4f4a82710201f7f",
+    "category":"61cbd194b4f4a82710201f82",
+    "startPrice":"20000",
+    "endPrice":"80000",
+    "closeTime": "18:5",
+    "openTime": "7:5",
+    "status":"public"
+}
+
+####
+
+GET http://localhost:5000/app/api/v1/places/nearBy/106.51292657870387/11.087526975265133?distance=500&category=61645bcaa7040c0016bf4c80
+
+### 
+GET http://localhost:5000/app/api/v1/places/nearBy/106.5151712/11.08935472?distance=500
+
+
+### Get recommend
+
+GET http://localhost:5000/app/api/v1/places/recommendItemsToUser/618dccf03e651a0e00fb15ca
+Content-Type: application/json
+
+### Get place recent 
+
+GET http://localhost:5000/app/api/v1/places/recentSearch/618dccf03e651a0e00fb15ca
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+###
+GET http://localhost:5000/app/api/v1/search/618dccf03e651a0e00fb15ca/friends
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+### Get recommend
+
+GET http://localhost:5000/app/api/v1/places/itemSimilar/61bc9e2f4eeca820dcf7f9ba/618dccf03e651a0e00fb15ca
+Content-Type: application/json

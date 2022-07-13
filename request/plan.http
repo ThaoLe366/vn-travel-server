@@ -1,0 +1,53 @@
+
+# @name login
+POST http://localhost:5000/app/api/v1/auths/login/users?userRole=true       
+Content-Type: application/json
+
+{
+   "email": "nhungle@gmail.com",
+   "password" : "12345"
+}
+
+###
+@authToken = {{login.response.body.token}}
+
+### Get plan of user
+
+
+GET http://localhost:5000/app/api/v1/plans
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+### Create new plan 
+
+POST http://localhost:5000/app/api/v1/plans
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
+{
+    "name":"Test announcement",
+    "start": "2021-12-01T06:00:00",
+    "end": "2021-12-06T18:00:00",
+    "note": "Mua quà lưu niệm",
+    "photoUrl": "https://wallpaperaccess.com/full/200944.jpg",
+    "members":[
+        "618dccf03e651a0e00fb15ca",
+        "61b69a624a14bd2d28d8cce0"
+    ]
+}
+
+### Update isHidden
+DELETE   http://localhost:5000/app/api/v1/plans/61b459a302f7af19e8ac537e
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJpZCI6IjYxOGRjY2YwM2U2NTFhMGUwMGZiMTVjYSIsImVtYWlsIjoibmh1bmdsZUBnbWFpbC5jb20iLCJpc1VzZXIiOnRydWUsImltYWdlIjoiaHR0cHM6Ly9yZXMuY2xvdWRpbmFyeS5jb20vdm50cmF2ZWwyODUzNjYvaW1hZ2UvdXBsb2FkL3YxNjM4ODczNTY1L2h5MTVuZnJ3ZnhwZXZsemQya2tsLmpwZyIsIm5hbWUiOiJUaGFvIExlZWUifSwiaWF0IjoxNjM5MjEzODc0LCJleHAiOjE2MzkyNDI2NzR9.jsvPnsbQdOETLhDSpmZuk34UYXYmJ84PKvckvQSuNGI
+
+### Update a plan 
+
+PUT http://localhost:5000/app/api/v1/plans/61bd6787c6378f2fc01d48b9
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJpZCI6IjYxOGRjY2YwM2U2NTFhMGUwMGZiMTVjYSIsImVtYWlsIjoibmh1bmdsZUBnbWFpbC5jb20iLCJpc1VzZXIiOnRydWUsImltYWdlIjoiaHR0cHM6Ly9yZXMuY2xvdWRpbmFyeS5jb20vdm50cmF2ZWwyODUzNjYvaW1hZ2UvdXBsb2FkL3YxNjQ1NzY3MDQxL2R2eXVsYXd1enlkcmNscG9vbGFoLmpwZyIsIm5hbWUiOiJUaGFvIEzDqiBUaOG7iyBQaMawxqFuZyJ9LCJpYXQiOjE2NTAxMjM0NzksImV4cCI6MTY1MDIwOTg3OX0.LxUkBK8Hrg9f3GXGDe--x6qjXpvOHhRBuWkFoKLrRks
+
+{
+    "members": [
+        "618dccf03e651a0e00fb15ca"
+    ]
+}

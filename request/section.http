@@ -1,0 +1,64 @@
+### Create new section
+
+POST http://localhost:5000/app/api/v1/sections
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJpZCI6IjYxOGRjY2YwM2U2NTFhMGUwMGZiMTVjYSIsImVtYWlsIjoibmh1bmdsZUBnbWFpbC5jb20iLCJpc1VzZXIiOnRydWUsImltYWdlIjoiaHR0cHM6Ly9yZXMuY2xvdWRpbmFyeS5jb20vdm50cmF2ZWwyODUzNjYvaW1hZ2UvdXBsb2FkL3YxNjM4NjMxNjc2L3FjZnlhdWV1ZGZibGN5bGRpbnJ0LmpwZyIsIm5hbWUiOiJOaHVuZyBMZSJ9LCJpYXQiOjE2Mzg4NDkzMDcsImV4cCI6MTYzODg3ODEwN30.m08kllBm2Ku3ytPpWrxx5QiXvJnG3b9Eq-LOB4dEiEg
+
+{
+   "isHidden": false,
+    "plan": "61a9925d71f8581b101ec191",
+    "start": "2021-12-04T00:00:00.000Z",
+    "end": "2021-12-04T00:00:00.000Z",
+    "places": [
+      {
+        "isVisited": false,
+        "expense": 150000,
+        "place": "613f4f867963b61e40efe78a",
+        "visitedTime": "2021-12-04T07:00:00.000Z"
+      },
+      {
+        "isVisited": false,
+        "expense": 400000,
+        "place": "613b1da30ea0491390fa5bb0",
+        "visitedTime": "2021-12-04T10:00:00.000Z"
+      }
+    ],
+    "note": "Explore every single corner of the world?! I would! On this page you will be able to find some stories and tips from places I have visited so far divided by geographical region. This section is constantly updated, so keep an eye on it for new destinations!"
+}
+
+###Get section by planId
+
+GET http://localhost:5000/app/api/v1/sections/plan/61a9925d71f8581b101ec191
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJpZCI6IjYxOGRjY2YwM2U2NTFhMGUwMGZiMTVjYSIsImVtYWlsIjoibmh1bmdsZUBnbWFpbC5jb20iLCJpc1VzZXIiOnRydWUsImltYWdlIjoiaHR0cHM6Ly9yZXMuY2xvdWRpbmFyeS5jb20vdm50cmF2ZWwyODUzNjYvaW1hZ2UvdXBsb2FkL3YxNjM4NjMxNjc2L3FjZnlhdWV1ZGZibGN5bGRpbnJ0LmpwZyIsIm5hbWUiOiJOaHVuZyBMZSJ9LCJpYXQiOjE2Mzg4NDkzMDcsImV4cCI6MTYzODg3ODEwN30.m08kllBm2Ku3ytPpWrxx5QiXvJnG3b9Eq-LOB4dEiEg
+
+
+### Get section by sectionId
+
+GET http://localhost:5000/app/api/v1/sections/61aedd62344fe71d9c5c1228
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJpZCI6IjYxOGRjY2YwM2U2NTFhMGUwMGZiMTVjYSIsImVtYWlsIjoibmh1bmdsZUBnbWFpbC5jb20iLCJpc1VzZXIiOnRydWUsImltYWdlIjoiaHR0cHM6Ly9yZXMuY2xvdWRpbmFyeS5jb20vdm50cmF2ZWwyODUzNjYvaW1hZ2UvdXBsb2FkL3YxNjM4NjMxNjc2L3FjZnlhdWV1ZGZibGN5bGRpbnJ0LmpwZyIsIm5hbWUiOiJOaHVuZyBMZSJ9LCJpYXQiOjE2Mzg4NDkzMDcsImV4cCI6MTYzODg3ODEwN30.m08kllBm2Ku3ytPpWrxx5QiXvJnG3b9Eq-LOB4dEiEg
+
+
+### Add new place to section
+
+PUT http://localhost:5000/app/api/v1/sections/611d266661710221102eb5d2/place/611930190aab361378748f0b
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJmYXZvcml0ZSI6WyI2MTFiNzdjN2EzYTM4NTQwOThmM2Y3ZjIiLCI2MTE5MzAxOTBhYWIzNjEzNzg3NDhmMGIiXSwiaXNVc2VyIjpmYWxzZSwiZW1haWwiOiJob2FuZ25ndXllbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlbDJJSFRkcElGd0QxZHlHLmZGT291bC9ZeWVKYXdXQXRTUFhlUVAvRUJ5Vm81dXJWM3plZSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTdUMDY6MjE6MTAuNzkyWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDgtMTdUMDY6MjE6MTAuNzkyWiIsImlkIjoiNjExYjU1NTZmZjEwMTMyMjYwZDllMjc5In0sImlhdCI6MTYyOTMwMzk0OSwiZXhwIjoxNjI5MzA3NTQ5fQ.oN6dADjDpoacaxmCYWgqJMemgy3Ta0Dg0ktHSh6WIEw
+
+### Update section
+PUT http://localhost:5000/app/api/v1/sections/611d266661710221102eb5d2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJmYXZvcml0ZSI6WyI2MTFiNzdjN2EzYTM4NTQwOThmM2Y3ZjIiLCI2MTE5MzAxOTBhYWIzNjEzNzg3NDhmMGIiXSwiaXNVc2VyIjpmYWxzZSwiZW1haWwiOiJob2FuZ25ndXllbkBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCRlbDJJSFRkcElGd0QxZHlHLmZGT291bC9ZeWVKYXdXQXRTUFhlUVAvRUJ5Vm81dXJWM3plZSIsImNyZWF0ZWRBdCI6IjIwMjEtMDgtMTdUMDY6MjE6MTAuNzkyWiIsInVwZGF0ZWRBdCI6IjIwMjEtMDgtMTdUMDY6MjE6MTAuNzkyWiIsImlkIjoiNjExYjU1NTZmZjEwMTMyMjYwZDllMjc5In0sImlhdCI6MTYyOTM2MDYxNCwiZXhwIjoxNjI5MzY0MjE0fQ.LrH8poXXUV0sauNsKiDcmg2Z7Qqub-i_DmqAOMCmVS8
+
+{
+    "note":"Hello, my name is Hoang",
+    "start": "2021-08-20T09:00:00",
+    "isHidden" : true
+}
+
+
+###
+DELETE  http://localhost:5000/app/api/v1/sections/61b02ac08369312b8c4f7994
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyQXV0aCI6eyJpZCI6IjYxOGRjY2YwM2U2NTFhMGUwMGZiMTVjYSIsImVtYWlsIjoibmh1bmdsZUBnbWFpbC5jb20iLCJpc1VzZXIiOnRydWUsImltYWdlIjoiaHR0cHM6Ly9yZXMuY2xvdWRpbmFyeS5jb20vdm50cmF2ZWwyODUzNjYvaW1hZ2UvdXBsb2FkL3YxNjM4ODczNTY1L2h5MTVuZnJ3ZnhwZXZsemQya2tsLmpwZyIsIm5hbWUiOiJUaGFvIExlZWUifSwiaWF0IjoxNjM4OTM0NjkyLCJleHAiOjE2Mzg5NjM0OTJ9.f7BlnJShz3PaJnmKG5PW7Uj4S1sjmB1hyKkvI7ragKc

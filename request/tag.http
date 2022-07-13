@@ -1,0 +1,40 @@
+# @name login
+POST https://vntravel-api.herokuapp.com/app/api/v1/auths/login/users?userRole=false
+Content-Type: application/json
+
+{
+    "email": "thaole301000@gmail.com",
+    "password" : "12345"
+}
+
+###
+@authToken = {{login.response.body.token}}
+###
+POST http://localhost:5000/app/api/v1/tags
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+{
+   "name":"Đồi núi",
+   "isHidden":false
+
+}
+
+###
+GET https://vntravel-api.herokuapp.com/app/api/v1/tags
+Content-Type: application/json
+
+###
+PUT https://vntravel-api.herokuapp.com/app/api/v1/tags/613ea5e3a6243319d4e0cad3
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+{
+   "name":"Chợ truyền thống 4",
+   "isHidden":"true"
+}
+
+###
+DELETE https://vntravel-api.herokuapp.com/app/api/v1/tags/6120b999cefe17339401199b
+Content-Type: application/json
+Authorization: token {{authToken}}

@@ -1,0 +1,23 @@
+### Login by email password
+# @name login
+POST http://localhost:5000/app/api/v1/auths/login/users?userRole=true       
+Content-Type: application/json
+
+{
+   "email": "nhungle@gmail.com",
+   "password" : "12345"
+}
+###
+@authToken = {{login.response.body.token}}
+###Get user 
+GET http://localhost:5000/app/api/v1/search?email=th
+Content-Type: application/json
+Authorization: token {{authToken}}
+
+### Get friend information
+GET http://localhost:5000/app/api/v1/search/friends
+Content-Type: application/json
+Authorization: token {{authToken}}
+### Get plan of user public
+GET http://localhost:5000/app/api/v1/search/618dccf03e651a0e00fb15ca/plans
+Content-Type: application/json
