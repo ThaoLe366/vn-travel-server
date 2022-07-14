@@ -58,7 +58,7 @@ router.post("/register", async (req, res) => {
     const salt = await bcrypt.genSaltSync(10);
     const createHashPassword = await bcrypt.hashSync(req.body.password, salt);
     let user = new User({
-      fullName: req.body.fullname,
+      fullName: req.body.fullName,
       email: req.body.email,
       password: createHashPassword,
     });
@@ -68,14 +68,15 @@ router.post("/register", async (req, res) => {
     });
     if (snapshot.length > 0) {
       return res.status(400).json({
-        message: "Email already taken",
+        engMessage: "Email already taken",
+        viMessage: "Email đã tồn tại.",
         success: false,
       });
     }
 
     user = await user.save();
     user = await User.populate(user, ["recentSearch.place"]);
-    
+
     const tokenGenerate = jwt.sign(
       {
         userAuth: {
@@ -84,6 +85,7 @@ router.post("/register", async (req, res) => {
           isUser: user.isUser,
           image: user.image,
           name: user.fullName,
+          aboutMe: user?.aboutMe,
         },
       },
       process.env.SECRET_KEY,
@@ -92,7 +94,8 @@ router.post("/register", async (req, res) => {
       }
     );
     return res.status(200).json({
-      message: "User created successfully",
+      engMessage: "User created successfully",
+      viMessage: "Tại tài khoản thành công",
       success: true,
       user: user,
       token: tokenGenerate,
@@ -113,11 +116,11 @@ router.post("/login/users", async (req, res) => {
       const snapshot = await User.findOne({
         email: req.body.email,
       }).populate("recentSearch.place");
-
       if (!snapshot) {
-        return res.status(401).json({
+        return res.status(403).json({
           success: false,
-          message: "Account not exist",
+          engMessage: "Account not exist.",
+          viMessage: "Tài khoản không tồn tại.",
         });
       }
       const passwordHash = snapshot.password;
@@ -126,6 +129,7 @@ router.post("/login/users", async (req, res) => {
       bcrypt.compare(enterPassword, passwordHash, function (err, result) {
         if (result == true) {
           if (req.query.userRole == String(snapshot.isUser)) {
+            console.log(snapshot);
             if (!snapshot.isHidden) {
               const tokenGenerate = jwt.sign(
                 {
@@ -135,6 +139,7 @@ router.post("/login/users", async (req, res) => {
                     isUser: snapshot.isUser,
                     image: snapshot.image,
                     name: snapshot.fullName,
+                    aboutMe: snapshot?.aboutMe,
                   },
                 },
                 process.env.SECRET_KEY,
@@ -144,26 +149,32 @@ router.post("/login/users", async (req, res) => {
               );
               return res.status(200).json({
                 success: true,
-                message: "Login successfully",
+                engMessage: "Login successfully.",
+                viMessage: "Đăng nhập thành công.",
                 token: tokenGenerate,
                 user: snapshot,
               });
             } else {
-              res.status(403).json({
-                message: "Your account is blocked",
+              return res.status(403).json({
+                engMessage:
+                  "Your account is blocked.Please contact admin to unlock. Email: nguyenhoang13166@gmail.com",
+                viMessage:
+                  "Tài khoản của bạn đã bị khóa. Vui lòng liên hệ admin: nguyenhoang13166@gmail.com",
                 success: false,
               });
             }
           } else {
-            return res.status(401).json({
-              message: "Role of user is not allowed",
+            return res.status(403).json({
+              engMessage: "Role of user is not allowed",
+              viMessage: "Vai trò không hợp lệ.",
               success: false,
             });
           }
         } else {
-          return res.status(401).json({
+          return res.status(403).json({
             success: false,
-            message: "Username or password are incorrect",
+            engMessage: "Username or password are incorrect",
+            viMessage: "Tên người dùng hoặc mật khẩu không đúng.",
           });
         }
       });

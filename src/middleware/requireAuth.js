@@ -61,7 +61,7 @@ const requireAuth = async (req, res, next) => {
             });
           }
         } else {
-          return res.status(401).json({
+          return res.status(403).json({
             message: "Authentication failed!",
             success: false,
           });
@@ -99,12 +99,13 @@ const requireAuth = async (req, res, next) => {
         //     success: false,
         //   });
         // }
+
       });
     } catch (err) {
       //TODO: temp wait for the better login with facebook
 
       console.log(err.message);
-      return res.status(401).json({
+      return res.status(403).json({
         message: "Authentication failed",
       });
     }

@@ -1,11 +1,16 @@
-const mongoose = require('mongoose');
-const { formatTimeUTC } = require('../utils/Timezone');
+const mongoose = require("mongoose");
+const { formatTimeUTC } = require("../utils/Timezone");
 
 const userSchema = mongoose.Schema({
   fullName: {
     type: String,
     require: true,
     min: 1,
+  },
+  aboutMe: {
+    type: String,
+    require: false,
+    default: "",
   },
   email: {
     type: String,
@@ -19,7 +24,7 @@ const userSchema = mongoose.Schema({
   favorite: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'places',
+      ref: "places",
     },
   ],
   isUser: {
@@ -36,7 +41,7 @@ const userSchema = mongoose.Schema({
   },
   image: {
     type: String,
-    default: 'https://hinhnen123.com/wp-content/uploads/2021/06/avt-cute-9.jpg',
+    default: "https://hinhnen123.com/wp-content/uploads/2021/06/avt-cute-9.jpg",
   },
   isHidden: {
     type: Boolean,
@@ -48,7 +53,7 @@ const userSchema = mongoose.Schema({
     {
       place: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'places',
+        ref: "places",
       },
       time: {
         type: Date,
@@ -61,7 +66,7 @@ const userSchema = mongoose.Schema({
   friends: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'users',
+      ref: "users",
     },
   ],
 
@@ -69,15 +74,15 @@ const userSchema = mongoose.Schema({
   friendsRequested: [
     {
       type: mongoose.Schema.Types.ObjectId,
-      ref: 'users',
-      default:[]
+      ref: "users",
+      default: [],
     },
   ],
 });
 
-userSchema.set('toJSON', {
+userSchema.set("toJSON", {
   transform: (document, returnedObject) => {
     returnedObject.id = returnedObject._id.toString();
   },
 });
-module.exports = mongoose.model('users', userSchema);
+module.exports = mongoose.model("users", userSchema);

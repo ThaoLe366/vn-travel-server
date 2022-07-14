@@ -84,7 +84,7 @@ const swagger = swaggerJSDocs(options);
 
 app.get(`/`, (req, res) => {
   res.status(200).json({
-    message: "Welcome to Viet Nam Travel V2 ",
+    message: "Welcome to Viet Nam Travel  ",
   });
 });
 

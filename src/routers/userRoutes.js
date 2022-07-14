@@ -240,10 +240,15 @@ router.put("/:userId/status", requireAuth, async (req, res, next) =>
 router.post("/profiles", requireAuth, async (req, res, next) => {
   //Just update profile of this token
   let userId = req.body.userAuth.id;
+  console.log(req.body);
   await User.findByIdAndUpdate(
     { _id: userId },
     {
-      $set: { fullName: req.body.fullName, image: req.body.image },
+      $set: {
+        fullName: req.body.fullName,
+        image: req.body.image,
+        aboutMe: req.body.aboutMe,
+      },
     },
     { new: true }
   )
@@ -474,14 +479,19 @@ router.put("/password", async (req, res) => {
     });
   }
 
-  const passwordHash = user.password;
+  // const passwordHash = user.password;// Chaneg to user in database 
+  const userInDatabase = await User.findById(user._id);
+  console.log(479, userInDatabase);
+  const passwordHash = userInDatabase.password;
+  console.log(481, req.body);
   const passwordCheck = req.body.password;
   const salt = await bcrypt.genSaltSync(10);
 
   const newPasswordHash = await bcrypt.hashSync(req.body.newPassword, salt);
   //Check password equal default password
   await bcrypt.compare(passwordCheck, passwordHash, function (err, result) {
-    if (result == true) {
+    console.log(488, result);
+    if (result == true ) {
       User.findOneAndUpdate(
         { email: req.body.email },
         {

@@ -3,9 +3,9 @@ POST http://localhost:5000/app/api/v1/auths/register
 Content-Type: application/json
 
 {
-     "email": "thaole301000@gmail.com",
+    "email": "hihihihi@gmail.com",
     "password" : "12345",
-    "fullName": "Le Thi Ngoc Nhung"
+    "fullName": "Hihihi"
 }
 
 ### Login by email password
@@ -14,7 +14,7 @@ POST http://localhost:5000/app/api/v1/auths/login/users?userRole=true
 Content-Type: application/json
 
 {
-   "email": "nhungle@gmail.com",
+   "email": "nguyenhoang@gmail.com",
    "password" : "12345"
 }
 
