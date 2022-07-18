@@ -1,5 +1,5 @@
 ### 
-DELETE http://localhost:5000/app/api/v1/recommendee/items/popular
+DELETE http://localhost:5000/app/api/v1/recommendee/items/undefined
 Content-Type: application/json
 
 
@@ -28,3 +28,7 @@ GET http://localhost:5000/app/api/v1/recommendee/getUserToUser/
 
 ###
 GET http://localhost:5000/app/api/v1/recommendee/searchFuzzy/lng
+
+
+###
+GET
