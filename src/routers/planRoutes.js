@@ -69,7 +69,6 @@ router.post('/', requireAuth, async (req, res) => {
 
     plan = await plan.save();
     plan = await Plan.populate(plan, ['user']);
-
     if (plan) {
       if (plan.members.length > 0) {
         let temp = {
@@ -86,6 +85,13 @@ router.post('/', requireAuth, async (req, res) => {
               message: 'Create plan successfully',
               plan: plan,
             });
+        });
+      }
+      else {
+        return res.json({
+          success: true,
+          message: 'Create plan successfully',
+          plan: plan,
         });
       }
     } else {

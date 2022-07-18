@@ -5,7 +5,7 @@ Content-Type: application/json
 
 {
    "email": "nhungle@gmail.com",
-   "password" : "12345"
+   "password" : "123@abcA"
 }
 
 ###
@@ -30,8 +30,7 @@ Authorization: Bearer {{authToken}}
     "note": "Mua quà lưu niệm",
     "photoUrl": "https://wallpaperaccess.com/full/200944.jpg",
     "members":[
-        "618dccf03e651a0e00fb15ca",
-        "61b69a624a14bd2d28d8cce0"
+       
     ]
 }
 
