@@ -20,6 +20,11 @@ Content-Type: application/json
 PUT  http://localhost:5000/app/api/v1/places/recombee
 Content-Type: application/json
 
-### 
-GET  http://localhost:5000/app/api/v1/recommendee/rating
-Content-Type: application/json
+
+### GET
+GET http://localhost:5000/app/api/v1/recommendee/getUserToUser/
+
+
+
+###
+GET http://localhost:5000/app/api/v1/recommendee/searchFuzzy/lng

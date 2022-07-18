@@ -136,3 +136,7 @@ Content-Type: application/json
 GET http://localhost:5000/app/api/v1/users/friends/618dccf03e651a0e00fb15ca
 Content-Type: application/json
 Authorization: Bearer {{authToken}}
+
+
+### GEt profile
+GET http://localhost:5000/app/api/v1/users/profileInfo/62d153cc6aee5e4098194fa1

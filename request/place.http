@@ -12,6 +12,10 @@ Content-Type: application/json
 @authToken = {{login.response.body.token}}
 ###
 
+GET  http://localhost:5000/app/api/v1/places/getAll
+Content-Type: application/json
+Authorization: Bearer {{authToken}}
+
 
 ### Create new place
 POST  http://localhost:5000/app/api/v1/places
@@ -46,7 +50,7 @@ Content-Type: application/json
 }
 ### Get place
 
-GET http://localhost:5000/app/api/v1/places/613b1da30ea0491390fa5bb0?populate=true
+GET http://localhost:5000/app/api/v1/places/61bc9e2f4eeca820dcf7f9ba?populate=true&userId=62d160275c166a3681eb4cbe
 Content-Type: application/json
 
 
@@ -120,15 +124,15 @@ Authorization: Bearer {{authToken}}
 
 ####
 
-GET http://localhost:5000/app/api/v1/places/nearBy/106.51292657870387/11.087526975265133?distance=500&category=61645bcaa7040c0016bf4c80
+GET http://localhost:5000/app/api/v1/places/nearBy/106/10?distance=5000
 
 ### 
-GET http://localhost:5000/app/api/v1/places/nearBy/106.5151712/11.08935472?distance=500
-
+GET http://localhost:5000/app/api/v1/places/nearBy/106/10?distance=5000
 
 ### Get recommend
 
-GET http://localhost:5000/app/api/v1/places/recommendItemsToUser/618dccf03e651a0e00fb15ca
+GET http://localhost:5000/app/api/v1/places/recommendItemsToUser/62d160275c166a3681eb4cbe?limit=20
+
 Content-Type: application/json
 
 ### Get place recent 
@@ -146,3 +150,40 @@ Authorization: Bearer {{authToken}}
 
 GET http://localhost:5000/app/api/v1/places/itemSimilar/61bc9e2f4eeca820dcf7f9ba/618dccf03e651a0e00fb15ca
 Content-Type: application/json
+
+
+<<<<<<< HEAD
+### 
+GET http://localhost:5000/app/api/v1/places/nearBy/106.7716309125056/10.849994381349983?distance=500
+
+
+###
+GET http://localhost:5000/app/api/v1/places/nearBy/106/10?distance=1000000
+
+###
+GET http://localhost:5000/app/api/v1/places
+=======
+https://api.search.io/v4/collections/{collection_id}:
+Content-Type: application/json
+
+{
+  "pipeline": {
+    "name": "string",
+    "version": "string"
+  },
+  "tracking": {
+    "data": {
+      "property1": "string",
+      "property2": "string"
+    },
+    "field": "string",
+    "query_id": "string",
+    "sequence": 0,
+    "type": "TYPE_UNSPECIFIED"
+  },
+  "variables": {
+    "property1": {},
+    "property2": {}
+  }
+}
+>>>>>>> 9d7b894... Update Alan

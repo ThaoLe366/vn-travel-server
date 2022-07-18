@@ -101,15 +101,49 @@ router.get("/private", async (req, res) => {
   }
 });
 
+router.get("/getAll", async (req, res) => {
+  try {
+    let placeList = [];
+
+    placeList = await Place.find(
+      {},
+      {
+        name: 1,
+        description: 1,
+        address: 1,
+        engName: 1,
+        engDescription: 1,
+        engAddress: 1,
+        rateVoting: 1,
+        images: 1,
+        openTime: 1,
+        closeTime: 1,
+        popular: 1,
+        lattitude: 1,
+        longtitude: 1,
+      }
+    );
+
+    return res.status(200).json({
+      success: true,
+      message: "Get places successfully",
+      places: placeList,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({
+      success: false,
+      message: err.message,
+    });
+  }
+});
+
 //@route GET v1/places/recommendItemsToUser
 //@desc Get recommend item to user by
 //@access public
 //@role any
 router.get("/recommendItemsToUser/:userId", async (req, res) => {
   try {
-    console.log(process.env.RECOMMENDBEE_APP);
-    console.log(process.env.RECOMMENDEE);
-    console.log(process.env.RECOMMENDBEE_REGION);
     const userId = req.params.userId;
     const limit = req.query.limit;
     client
@@ -119,20 +153,32 @@ router.get("/recommendItemsToUser/:userId", async (req, res) => {
         })
       )
       .then(async (result) => {
+        const recommId = result.recommId;
         const recomms = result?.recomms.map((item) => item.id);
-        let placesRecommend = await Place.find({
+        return await Place.find({
           status: STATUS.PUBLIC,
           _id: { $in: recomms },
         })
           .populate("province")
           .populate("category")
           .populate("tags")
-          .exec();
-        return res.status(200).json({
-          success: true,
-          message: "Get places successfully",
-          places: placesRecommend,
-        });
+          .lean()
+          .exec()
+          .then((result) => {
+            let tmpResult = [...result];
+            console.log(130, recommId);
+            tmpResult = tmpResult.map((place) => {
+              // place.$set({ recommId: recommId });
+              // console.log(place);
+              // return place;
+              (place.recommId = recommId), (place.id = place._id);
+            });
+            return res.status(200).json({
+              success: true,
+              message: "Get places successfully",
+              places: result,
+            });
+          });
       })
       .catch((error) => {
         console.log("62 Recommend Item to user error", error);
@@ -261,20 +307,40 @@ router.get("/:placeId", async (req, res) => {
   try {
     let placeList = [];
     let filterById = req.params.placeId;
+    console.log(271, filterById);
+    const isRecommenSuccess = req.query.recommId;
+    console.log("Is recommedn ", isRecommenSuccess);
     //* Recombee
     if (req.query.userId) {
-      client
-        .send(
-          new AddDetailView(req.query.userId, req.params.placeId, {
-            cascadeCreate: true,
+      if (isRecommenSuccess) {
+        console.log(278, "hihi");
+        client
+          .send(
+            new AddDetailView(req.query.userId, req.params.placeId, {
+              cascadeCreate: true,
+              recommId: isRecommenSuccess,
+            })
+          )
+          .then((response) => {
+            console.log("281 success recombee from has recommId ");
           })
-        )
-        .then((response) => {
-          console.log("281 success recombee ");
-        })
-        .catch((error) => {
-          console.log("283 ", error);
-        });
+          .catch((error) => {
+            console.log("283 ", error);
+          });
+      } else {
+        client
+          .send(
+            new AddDetailView(req.query.userId, req.params.placeId, {
+              cascadeCreate: true,
+            })
+          )
+          .then((response) => {
+            console.log("281 success recombee nothing has recommId");
+          })
+          .catch((error) => {
+            console.log("283 ", error);
+          });
+      }
     }
     //* End
 
@@ -716,6 +782,7 @@ router.get("/nearBy/:lng/:lat", async (req, res) => {
     //         Math.abs(place.longtitude - b.longtitude))
     //   );
     // res.json({ success: true, message: "Get place successfully", places });
+    console.log(717, parseFloat(req.params.lng).toFixed(2), req.params.lat);
     const distance = req.query.distance ?? 10000;
     const category = req.query.category ?? "";
     let places = [];
@@ -741,7 +808,10 @@ router.get("/nearBy/:lng/:lat", async (req, res) => {
           $near: {
             $geometry: {
               type: "Point",
-              coordinates: [req.params.lng, req.params.lat],
+              coordinates: [
+                parseFloat(parseFloat(req.params.lng).toFixed(4)),
+                parseFloat(parseFloat(req.params.lat).toFixed(4)),
+              ],
             },
             $maxDistance: distance,
           },
@@ -751,7 +821,12 @@ router.get("/nearBy/:lng/:lat", async (req, res) => {
         .populate("category")
         .populate("tags");
     }
-    res.json({ success: true, message: "Get place successfully", places });
+    res.json({
+      count: places.length,
+      success: true,
+      message: "Get place successfully",
+      places,
+    });
   } catch (error) {
     console.log(error);
     res.status(500).json({

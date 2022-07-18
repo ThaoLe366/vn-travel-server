@@ -589,4 +589,37 @@ router.get("/friends", requireAuth, async (req, res) => {
     });
   }
 });
+
+
+//For demo recombee
+router.get("/profileInfo/:userId", async (req, res) => {
+  try {
+    let userId = req.params.userId;
+    // let userId= req.params.userId;
+
+    await User.findById(userId)
+      .select("-password")
+ 
+      .exec(function (err, documents) {
+        if (!err) {
+          return res.status(200).json({
+            success: true,
+            message: "Get user profile info  successfully",
+            friends: documents,
+          });
+        } else {
+          res.status(500).json({
+            success: false,
+            message: "Internal error server",
+          });
+        }
+      });
+  } catch (err) {
+    console.log(err.message);
+    res.status(500).json({
+      success: false,
+      message: "Internal error server",
+    });
+  }
+});
 module.exports = router;
